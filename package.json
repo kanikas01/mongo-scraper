@@ -1,0 +1,32 @@
+{
+  "name": "mongo-scraper",
+  "version": "1.0.0",
+  "description": "A web app that uses Cheerio and MongoDB to scrape news stories and allows users to comment on them.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanikas01/mongo-scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kanikas01/mongo-scraper/issues"
+  },
+  "homepage": "https://github.com/kanikas01/mongo-scraper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
+    "compression": "^1.7.4",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "mongoose": "^5.5.2",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
