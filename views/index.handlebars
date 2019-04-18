@@ -1,8 +1,14 @@
-<div class="container">
+
+<div class="container-fluid article-container">
   {{#each articles}}
-  <p>{{this._id}}</p>
-  <p>{{this.title}}</p>
-  <p><a href="{{this.link}}">Click Here</a></p>
-  <p>-------------</p>
+  <div data-_id="{{this._id}}" class="card">
+    <div class="card-header">
+      <h3>
+        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
+      </h3>
+    </div>
+    <p><div class="card-body">Lorem ipsum</div></p>
+  </div>
   {{/each}}
 </div>
+
