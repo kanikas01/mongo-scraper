@@ -99,7 +99,7 @@ body {
   right: 20px;
 }
 
-.card .card-header .btn.delete {
+.card .card-header .btn.btn-delete {
   right: 160px;
 }
 
