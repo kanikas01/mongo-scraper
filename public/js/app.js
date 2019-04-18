@@ -1,19 +1,23 @@
 /* eslint-disable no-undef */
-// Grab the articles as a json
-$.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append(
-      "<p data-id='" +
-        data[i]._id +
-        "'>" +
-        data[i].title +
-        "<br />" +
-        data[i].link +
-        "</p>"
-    );
-  }
+
+// Scrape new articles
+$(document).on("click", ".scrape-new", function() {
+  $.ajax({
+    method: "GET",
+    url: "/scrape"
+  }).then(function() {
+    location.reload();
+  });
+});
+
+// Delete articles from DB
+$(document).on("click", ".clear", function() {
+  $.ajax({
+    method: "DELETE",
+    url: "/articles"
+  }).then(function() {
+    location.reload();
+  });
 });
 
 // Whenever someone clicks a p tag

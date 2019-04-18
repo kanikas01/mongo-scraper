@@ -128,6 +128,17 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
+// Route for deleting all articles from the DB
+app.delete("/articles", function(req, res) {
+  db.Article.deleteMany({})
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
 // Start the server
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
