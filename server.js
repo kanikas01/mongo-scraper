@@ -47,19 +47,13 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Routes
 
-/////////////////
-// TODO UPDATE ROUTES
-
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
-  // First, we grab the body of the html with axios
   axios.get("http://www.echojs.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
     $("article h2").each(function() {
-      // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
@@ -73,11 +67,9 @@ app.get("/scrape", function(req, res) {
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function(dbArticle) {
-          // View the added result in the console
           console.log(dbArticle);
         })
         .catch(function(err) {
-          // If an error occurred, log it
           console.log(err);
         });
     });
@@ -88,15 +80,14 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
-  // Grab every document in the Articles collection
+app.get("/", function(req, res) {
   db.Article.find({})
     .then(function(dbArticle) {
-      // If we were able to successfully find Articles, send them back to the client
-      res.json(dbArticle);
+      res.render("index", {
+        articles: dbArticle
+      });
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
@@ -108,11 +99,9 @@ app.get("/articles/:id", function(req, res) {
     // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
-      // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
@@ -132,11 +121,9 @@ app.post("/articles/:id", function(req, res) {
       );
     })
     .then(function(dbArticle) {
-      // If we were able to successfully update an Article, send it back to the client
       res.json(dbArticle);
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
