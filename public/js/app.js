@@ -6,6 +6,20 @@ $(document).on("click", ".scrape-new", function() {
     method: "GET",
     url: "/scrape"
   }).then(function() {
+    location.assign("/");
+  });
+});
+
+// Save articles
+$(document).on("click", ".save", function() {
+  var thisId = $(this)
+    .parents(".card")
+    .attr("data-id");
+
+  $.ajax({
+    method: "PUT",
+    url: "/articles/" + thisId
+  }).then(function() {
     location.reload();
   });
 });
@@ -16,16 +30,21 @@ $(document).on("click", ".clear", function() {
     method: "DELETE",
     url: "/articles"
   }).then(function() {
-    location.reload();
+    location.assign("/");
   });
 });
 
-// Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+// Whenever someone clicks an 'add-note' button
+$(document).on("click", ".add-note", function() {
+  console.log($(this));
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
-  var thisId = $(this).attr("data-id");
+  var thisId = $(this)
+    .parents()
+    .attr("data-id");
+
+  console.log(thisId);
 
   // Now make an ajax call for the Article
   $.ajax({
