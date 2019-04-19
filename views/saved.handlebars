@@ -1,4 +1,15 @@
 
+<div class="jumbotron text-center">
+    <div class="overlay">
+    </div>
+    <div class="background-image">
+    </div>
+    <div class="caption">
+      <h1>Mongo Scraper</h1>
+      <p>Kurt Statham Edition</p>
+    </div>
+  </div>
+
 <div class="container-fluid article-container">
   {{#each articles}}
   <div data-id="{{this._id}}" class="card">
@@ -6,7 +17,7 @@
       <h3>
         <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
         <a class="btn btn-danger delete">Delete From Saved</a>
-        <a class="btn btn-info notes">Article Notes</a>
+        <a href="articles/{{this._id}}" class="btn btn-info notes">Article Notes</a>
       </h3>
     </div>
     <div class="card-body">
@@ -15,5 +26,3 @@
   </div>
   {{/each}}
 </div>
-
-<script src="/js/saved.js"></script>
