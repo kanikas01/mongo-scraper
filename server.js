@@ -45,7 +45,7 @@ const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-// Routes
+// ---------- ROUTES ---------- //
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
@@ -77,7 +77,7 @@ app.get("/scrape", function(req, res) {
   });
 });
 
-// Route for getting all Articles from the db
+// Get all unsaved Articles from the db
 app.get("/", function(req, res) {
   db.Article.find({ isSaved: false })
     .then(function(dbArticle) {
@@ -90,7 +90,7 @@ app.get("/", function(req, res) {
     });
 });
 
-// Route for getting all saved Articles from the db
+// Get all saved Articles from the db
 app.get("/saved", function(req, res) {
   db.Article.find({ isSaved: true })
     .then(function(dbArticle) {
@@ -103,10 +103,9 @@ app.get("/saved", function(req, res) {
     });
 });
 
-// Route for saving a specific Article by id
-app.put("/articles/:id", function(req, res) {
+// Save a specific Article by id
+app.put("/save-article/:id", function(req, res) {
   db.Article.updateOne({ _id: req.params.id }, { $set: { isSaved: true } })
-    .populate("note")
     .then(function(dbArticle) {
       res.json(dbArticle);
     })
@@ -115,7 +114,29 @@ app.put("/articles/:id", function(req, res) {
     });
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
+// Remove a single saved article
+app.put("/remove-article/:id", function(req, res) {
+  db.Article.updateOne({ _id: req.params.id }, { $set: { isSaved: false } })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
+// Remove all saved articles
+app.put("/remove-article", function(req, res) {
+  db.Article.updateMany({ isSaved: true }, { $set: { isSaved: false } })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
+// Get a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
   db.Article.findOne({ _id: req.params.id })
     .populate("note")
@@ -127,7 +148,7 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
-// Route for saving/updating an Article's associated Note
+// Save or update an Article's associated Note
 app.post("/articles/:id", function(req, res) {
   db.Note.create(req.body)
     .then(function(dbNote) {
@@ -146,7 +167,7 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
-// Route for deleting all non-saved articles from the DB
+// Delete all non-saved articles from the DB
 app.delete("/articles", function(req, res) {
   db.Article.deleteMany({ isSaved: false })
     .then(function(dbArticle) {
@@ -156,6 +177,8 @@ app.delete("/articles", function(req, res) {
       res.json(err);
     });
 });
+
+// ---------- END ROUTES ---------- //
 
 // Start the server
 app.listen(PORT, function() {
