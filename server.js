@@ -136,12 +136,14 @@ app.put("/remove-article", function(req, res) {
     });
 });
 
-// Get a specific Article by id, populate it with it's note
+// Get a specific Article by id, populate it with its note(s)
 app.get("/articles/:id", function(req, res) {
   db.Article.findOne({ _id: req.params.id })
     .populate("note")
     .then(function(dbArticle) {
-      res.json(dbArticle);
+      res.render("note", {
+        article: dbArticle
+      });
     })
     .catch(function(err) {
       res.json(err);
