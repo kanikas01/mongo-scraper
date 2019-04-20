@@ -64,8 +64,8 @@ $(document).ready(function() {
   // Add note to article
   function handleAddNote(event) {
     event.preventDefault();
-    var thisId = $(this).attr("data-id");
-    var note = {
+    let thisId = $(this).attr("data-id");
+    let note = {
       body: $("#body").val()
     };
 
