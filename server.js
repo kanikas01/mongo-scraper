@@ -49,9 +49,9 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
-  axios.get("http://www.echojs.com/").then(function(response) {
+  axios.get("http://www.theonion.com/").then(function(response) {
     var $ = cheerio.load(response.data);
-    $("article h2").each(function() {
+    $("h1").each(function() {
       var result = {};
       result.title = $(this)
         .children("a")
@@ -60,6 +60,12 @@ app.get("/scrape", function(req, res) {
       result.link = $(this)
         .children("a")
         .attr("href")
+        .trim();
+      result.summary = $(this)
+        .parent()
+        .siblings()
+        .find("p")
+        .text()
         .trim();
 
       // Create a new Article using the `result` object built from scraping

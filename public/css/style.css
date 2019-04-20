@@ -9,7 +9,7 @@ body {
 }
 
 .card a:not([href]):not([tabindex]).scrape-new {
-  color: #2196F3;
+  color: #006B3A;
 }
 
 .footer {
@@ -18,11 +18,12 @@ body {
   width: 100%;
   height: 80px;
   color: white;
-  background-color: #2196f3;
+  background-color: transparent;
 }
 
 .navbar {
   margin-bottom: 0;
+  background-color: #006B3A !important;
 }
 
 .jumbotron {
@@ -83,7 +84,7 @@ body {
 }
 
 .card .card-header {
-  background-color: #2196f3;
+  background-color: #006B3A;
   position: relative;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -123,7 +124,7 @@ body {
   padding-left: 10px;
   margin: 0;
   font-weight: 800;
-  background: #0c7cd5;
+  background: #006B3A;
 }
 
 .navbar-nav > li > a.scrape-new,

@@ -1,12 +1,13 @@
 <div class="container">
   <p>{{article.title}}</p>
   <p>{{article.link}}</p>
+  <p>{{article.summary}}</p>
   <div class="row">
     <div class="col-6">
       <form>
         <div class="form-group">
-          <label for="body">Note</label>
-          <textarea type="text" class="form-control body" id="body" rows="3" placeholder="Enter note">{{article.note.body}}</textarea>
+          <label for="body">Notes</label>
+          <textarea type="text" class="form-control body" id="body" rows="3" placeholder="Enter notes">{{article.note.body}}</textarea>
         </div>
         <button type="submit" data-id="{{article._id}}" class="btn btn-primary add-note">Submit</button>
       </form>
