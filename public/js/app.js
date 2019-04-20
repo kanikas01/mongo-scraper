@@ -74,7 +74,7 @@ $(document).ready(function() {
       url: "/articles/" + thisId,
       data: note
     }).then(function() {
-      $(".toast").toast({ delay: 1000 });
+      $(".toast").toast({ delay: 1500 });
       $(".toast").toast("show");
     });
   }

@@ -130,7 +130,8 @@ body {
 .navbar-nav > li > a.scrape-new,
 .navbar-nav > li > a.clear {
   padding: 10px;
-  margin-top: 10px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
   margin-left: 10px;
   font-weight: 800;
   color: white;
@@ -172,4 +173,5 @@ textarea {
 textarea {
   border: 1px solid gray !important;
   border-radius: .25rem !important;
+  resize: vertical;
 }
