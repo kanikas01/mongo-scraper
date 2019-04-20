@@ -1,17 +1,25 @@
 <div class="container">
-  
-  <p>{{article._id}}</p>
   <p>{{article.title}}</p>
   <p>{{article.link}}</p>
   <div class="row">
-    <div class="col">
+    <div class="col-6">
       <form>
         <div class="form-group">
           <label for="body">Note</label>
-          <textarea type="text" class="form-control body" id="body" rows="3" placeholder="Enter note"></textarea>
+          <textarea type="text" class="form-control body" id="body" rows="3" placeholder="Enter note">{{article.note.body}}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary add-note">Submit</button>
+        <button type="submit" data-id="{{article._id}}" class="btn btn-primary add-note">Submit</button>
       </form>
     </div>
   </div>
+
+  <div class="d-inline-flex align-items-center mt-4">
+    <div class="toast">
+      <div class="toast-body">
+        Note saved!
+      </div>
+    </div>
+  </div>
+
 </div>
+

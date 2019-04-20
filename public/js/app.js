@@ -7,6 +7,7 @@ $(document).ready(function() {
   $(document).on("click", ".btn.clear", deleteUnsavedArticles);
   $(document).on("click", ".btn.save", saveArticles);
   $(document).on("click", ".btn.delete", handleArticleDelete);
+  $(document).on("click", ".btn.add-note", handleAddNote);
 
   // ---------- Event Handlers ---------- //
 
@@ -45,6 +46,7 @@ $(document).ready(function() {
     });
   }
 
+  // Remove article from saved articles
   function handleArticleDelete() {
     let thisCard = $(this).parents(".card");
     let thisId = $(this)
@@ -56,6 +58,24 @@ $(document).ready(function() {
       url: "/remove-article/" + thisId
     }).then(function() {
       thisCard.remove();
+    });
+  }
+
+  // Add note to article
+  function handleAddNote(event) {
+    event.preventDefault();
+    var thisId = $(this).attr("data-id");
+    var note = {
+      body: $("#body").val()
+    };
+
+    $.ajax({
+      method: "POST",
+      url: "/articles/" + thisId,
+      data: note
+    }).then(function() {
+      $(".toast").toast({ delay: 1000 });
+      $(".toast").toast("show");
     });
   }
 });
