@@ -5,9 +5,10 @@ $(document).ready(function() {
 
   $(document).on("click", ".btn.scrape-new", scrapeArticles);
   $(document).on("click", ".btn.clear", deleteUnsavedArticles);
-  $(document).on("click", ".btn.save", saveArticles);
-  $(document).on("click", ".btn.delete", handleArticleDelete);
-  $(document).on("click", ".btn.add-note", handleAddNote);
+  $(document).on("click", ".btn.save", saveArticle);
+  $(document).on("click", ".btn.delete", deleteArticle);
+  $(document).on("click", ".btn.add-note", addNote);
+  $(document).on("click", ".btn.delete-note", deleteNote);
 
   // ---------- Event Handlers ---------- //
 
@@ -32,7 +33,7 @@ $(document).ready(function() {
   }
 
   // Save articles
-  function saveArticles() {
+  function saveArticle() {
     let thisCard = $(this).parents(".card");
     let thisId = $(this)
       .parents(".card")
@@ -47,7 +48,7 @@ $(document).ready(function() {
   }
 
   // Remove article from saved articles
-  function handleArticleDelete() {
+  function deleteArticle() {
     let thisCard = $(this).parents(".card");
     let thisId = $(this)
       .parents(".card")
@@ -62,7 +63,7 @@ $(document).ready(function() {
   }
 
   // Add note to article
-  function handleAddNote(event) {
+  function addNote(event) {
     event.preventDefault();
     let thisId = $(this).attr("data-id");
     let note = {
@@ -74,8 +75,19 @@ $(document).ready(function() {
       url: "/articles/" + thisId,
       data: note
     }).then(function() {
-      $(".toast").toast({ delay: 1500 });
-      $(".toast").toast("show");
+      location.reload();
+    });
+  }
+
+  // Delete note
+  function deleteNote() {
+    let thisCard = $(this).parents(".card");
+    let thisId = $(this).attr("data-id");
+    $.ajax({
+      method: "DELETE",
+      url: "/notes/" + thisId
+    }).then(function() {
+      thisCard.remove();
     });
   }
 });

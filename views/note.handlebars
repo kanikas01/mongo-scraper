@@ -9,25 +9,27 @@
       <p>{{article.summary}}</p>
     </div>
   </div>
+
+  <div id="comments">
+    {{#each article.notes}}
+    <div class="card">
+      <div class="card-body">
+        <p>{{this.body}}</p>
+        <button type="submit" data-id="{{this._id}}" class="btn btn-danger delete-note">Delete Note</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
   <div class="row">
     <div class="col-sm-12">
       <form>
         <div class="form-group">
           <label for="body">Notes</label>
-          <textarea type="text" class="form-control body" id="body" rows="5" placeholder="Enter notes">{{article.note.body}}</textarea>
+          <textarea type="text" class="form-control body" id="body" rows="5" placeholder="Enter notes"></textarea>
         </div>
         <button type="submit" data-id="{{article._id}}" class="btn btn-success add-note">Submit</button>
       </form>
     </div>
   </div>
-
-  <div class="d-inline-flex align-items-center mt-4">
-    <div class="toast">
-      <div class="toast-body">
-        Note saved!
-      </div>
-    </div>
-  </div>
-
 </div>
-

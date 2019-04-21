@@ -18,13 +18,15 @@ const ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  // `note` is an object that stores a Note id
+  // `notes` is an array that stores objects containing Note ids
   // The ref property links the ObjectId to the Note model
-  // This allows us to populate the Article with an associated Note
-  note: {
-    type: Schema.Types.ObjectId,
-    ref: "Note"
-  },
+  // This allows us to populate the Article with associated Notes
+  notes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Note"
+    }
+  ],
   isSaved: {
     type: Boolean,
     required: true,

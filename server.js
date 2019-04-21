@@ -145,7 +145,7 @@ app.put("/remove-article", function(req, res) {
 // Get a specific Article by id, populate it with its note(s)
 app.get("/articles/:id", function(req, res) {
   db.Article.findOne({ _id: req.params.id })
-    .populate("note")
+    .populate("notes")
     .then(function(dbArticle) {
       res.render("note", {
         article: dbArticle
@@ -163,7 +163,7 @@ app.post("/articles/:id", function(req, res) {
       // { new: true } tells query to return the updated Article, not the original
       return db.Article.findOneAndUpdate(
         { _id: req.params.id },
-        { note: dbNote._id },
+        { $push: { notes: dbNote._id } },
         { new: true }
       );
     })
@@ -180,6 +180,17 @@ app.delete("/articles", function(req, res) {
   db.Article.deleteMany({ isSaved: false })
     .then(function(dbArticle) {
       res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
+// Delete note
+app.delete("/notes/:id", function(req, res) {
+  db.Note.deleteOne({ _id: req.params.id })
+    .then(function(dbNote) {
+      res.json(dbNote);
     })
     .catch(function(err) {
       res.json(err);
