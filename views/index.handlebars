@@ -11,28 +11,28 @@
 
 <div class="container-fluid article-container">
   {{#if articles}}
-  {{#each articles}}
-  <div data-id="{{this._id}}" class="card">
-    <div class="card-header">
-      <h3>
-        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
-        <a class="btn btn-success save">Save Article</a>
-      </h3>
-    </div>
-    <div class="card-body">
-      <p>{{this.summary}}</p>
-    </div>
-  </div>
-  {{/each}}
+    {{#each articles}}
+      <div data-id="{{this._id}}" class="card">
+        <div class="card-header">
+          <h3>
+            <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
+            <a class="btn btn-success save">Save Article</a>
+          </h3>
+        </div>
+        <div class="card-body">
+          <p>{{this.summary}}</p>
+        </div>
+      </div>
+    {{/each}}
 
-  {{else}}
-  <div data-id="{{this._id}}" class="card">
-    <div class="card-header">
-      <h3 class="text-align-center">No articles to show. Scrape away!</h3>
-    </div>
-    <div class="card-body">
-      <p>{{this.summary}}</p>
-    </div>
-  </div>
-  {{/if}}
+    {{else}}
+      <div data-id="{{this._id}}" class="card">
+        <div class="card-header">
+          <h3 class="text-align-center">No articles to show. Scrape away!</h3>
+        </div>
+        <div class="card-body">
+          <p>{{this.summary}}</p>
+        </div>
+      </div>
+    {{/if}}
 </div>
