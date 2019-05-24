@@ -15,8 +15,8 @@ const ArticleSchema = new Schema({
     unique: true
   },
   summary: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   // `notes` is an array that stores objects containing Note ids
   // The ref property links the ObjectId to the Note model

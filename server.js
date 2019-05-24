@@ -54,13 +54,12 @@ app.get("/scrape", function(req, res) {
     $("h1").each(function() {
       var result = {};
       result.title = $(this)
-        .children("a")
+        // .children("a")
         .text()
         .trim();
       result.link = $(this)
-        .children("a")
-        .attr("href")
-        .trim();
+        .parent("a")
+        .attr("href");
       result.summary = $(this)
         .parent()
         .siblings()
