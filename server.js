@@ -51,7 +51,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 app.get("/scrape", function(req, res) {
   axios.get("http://www.theonion.com/").then(function(response) {
     var $ = cheerio.load(response.data);
-    $("h2").each(function() {
+    $("h4").each(function() {
       var result = {};
       result.title = $(this)
         // .children("a")
